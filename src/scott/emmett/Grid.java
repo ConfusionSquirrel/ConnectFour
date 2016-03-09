@@ -37,8 +37,7 @@ public class Grid {
 	public void printBoard(){
 		for(int i = 0; i < 6; i++){
 			for(int j = 0; j < 7; j++){
-				System.out.print(columns.get(j).get(i).getChar());
-				System.out.print(" ");
+				System.out.print(columns.get(j).get(i).getChar() + " ");
 			}
 			System.out.println("");
 		}
