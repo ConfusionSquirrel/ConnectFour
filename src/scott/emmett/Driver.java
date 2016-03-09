@@ -13,8 +13,7 @@ public class Driver {
 	//for testing
 	private static void takeInput(Grid grid){
 		System.out.println("Enter \"print\" to print the grid");
-		Scanner in = new Scanner(System.in);
-		String input = in.nextLine();
+		String input = Input.humanInput();
 		if(input.equals("print")){
 			grid.printBoard();
 		}
