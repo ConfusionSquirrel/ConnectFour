@@ -8,10 +8,9 @@ public class Driver {
 		Grid grid = new Grid();
 		
 		takeInput(grid);
-		
 	}
 	
-	//temporary, for testing
+	//for testing
 	private static void takeInput(Grid grid){
 		System.out.println("Enter \"print\" to print the grid");
 		Scanner in = new Scanner(System.in);
