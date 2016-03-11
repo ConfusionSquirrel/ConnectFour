@@ -17,6 +17,9 @@ public class Driver {
 		if(input.equals("print")){
 			grid.printBoard();
 		}
+		else if(input.equals("move")){
+			grid.move();
+		}
 	}
 
 }
