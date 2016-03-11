@@ -13,7 +13,7 @@ public class Tile {
 		if(s.equals("Red")){
 			state = 1;
 		}
-		else if(s.equals("Blue")){
+		else if(s.equals("Yellow")){
 			state = 2;
 		}
 		refreshSymbol();

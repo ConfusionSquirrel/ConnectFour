@@ -22,7 +22,7 @@ public class Grid {
 	}
 	
 	//Returns the row number of the first open row in a column. Returns 8 if the column is full
-	private int firstOpen(int column){
+	public int firstOpen(int column){
 		ArrayList<Tile> thisColumn = new ArrayList<>();
 		thisColumn = columns.get(column);
 		for(int i = 0; i < 6; i++){
@@ -35,7 +35,10 @@ public class Grid {
 	
 	//Beginning of turn processing. Takes input for which column to play a piece in, and keeps
 		//asking until input is valid
-	public void move(){
+	//Sets the first open space in selected column to the symbol of the specified player
+		//"red" (O) for player 1, "yellow" (X) for player 2
+	//Prints the grid
+	public void move(int playerNum){
 		boolean goodInput = false;
 		String input = "";
 		int inputCol = 8;
@@ -50,13 +53,36 @@ public class Grid {
 				}
 			}
 		}
+		int row = firstOpen(inputCol);
+		String playerColour;
+		if(playerNum == 1){
+			playerColour = "Red";
+		}
+		else{
+			playerColour = "Yellow";
+		}
+		columns.get(inputCol).get(row).setTile(playerColour);
+		printBoard();
+	}
+	
+	//Alternate; works if you have pre-checked column and row
+	public void move(int playerNum, int column, int row){
+		String playerColour;
+		if(playerNum == 1){
+			playerColour = "Red";
+		}
+		else{
+			playerColour = "Yellow";
+		}
+		columns.get(column).get(row).setTile(playerColour);
+		printBoard();
 	}
 	
 	//Temp text-based
 
 	//prints board to screen
 	public void printBoard(){
-		for(int i = 0; i < 6; i++){
+		for(int i = 5; i >= 0; i--){
 			for(int j = 0; j < 7; j++){
 				System.out.print(columns.get(j).get(i).getChar() + " ");
 			}
