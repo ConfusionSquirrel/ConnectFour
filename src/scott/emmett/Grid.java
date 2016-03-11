@@ -45,7 +45,7 @@ public class Grid {
 		while(!goodInput){
 			input = Input.promptInput("Which column would you like to place your piece in? (1-7):");
 			try{
-				inputCol = Integer.valueOf(input);
+				inputCol = Integer.valueOf(input) - 1;
 			}catch(Exception e){}
 			if(inputCol < 8 && inputCol >= 0){
 				if(firstOpen(inputCol) != 8){
@@ -61,7 +61,7 @@ public class Grid {
 		else{
 			playerColour = "Yellow";
 		}
-		columns.get(inputCol).get(row).setTile(playerColour);
+		columns.get(inputCol-1).get(row).setTile(playerColour);
 		printBoard();
 	}
 	
