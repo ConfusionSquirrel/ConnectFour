@@ -79,7 +79,6 @@ public class Grid {
 	}
 	
 	//Temp text-based
-
 	
 	//prints board
 	public void printBoard(){
