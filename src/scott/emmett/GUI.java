@@ -35,10 +35,10 @@ public class GUI {
 		
 		GridBagConstraints c = new GridBagConstraints();
 		
+		//add main grid images
 		try{
 			image = new ImageIcon("C4Open.png");
 		}catch(Exception e){}
-		
 		for(int i = 3; i < 10; i++){
 			c.gridx = i;
 			for(int j = 3; j < 9; j++){
@@ -47,7 +47,39 @@ public class GUI {
 			}
 		}
 		
+		//add left side images
+		try{
+			image = new ImageIcon("C4LeftSide.png");
+		}catch(Exception e){}
+		c.gridx = 2;
+		for(int j = 3; j < 9; j++){
+			c.gridy = j;
+			panel.add(new JLabel(image), c);
+		}
 		
+		//add right side images
+		try{
+			image = new ImageIcon("C4RightSide.png");
+		}catch(Exception e){}
+		c.gridx = 10;
+		for(int j = 3; j < 9; j++){
+			c.gridy = j;
+			panel.add(new JLabel(image), c);
+		}
+		
+		//add feet
+		try{
+			image = new ImageIcon("C4LeftLeg.png");
+		}catch(Exception e){}
+		c.gridx = 2;
+		c.gridy = 9;
+		panel.add(new JLabel(image), c);
+		try{
+			image = new ImageIcon("C4RightLeg.png");
+		}catch(Exception e){}
+		c.gridx = 10;
+		c.gridy = 9;
+		panel.add(new JLabel(image), c);
 		
 	}
 	
