@@ -6,6 +6,7 @@ public class Driver {
 
 	public static void main(String[] args) {
 		Grid grid = new Grid();
+		GUI face = new GUI();
 		
 		takeInput(grid);
 	}
