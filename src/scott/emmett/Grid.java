@@ -80,7 +80,8 @@ public class Grid {
 	
 	//Temp text-based
 
-	//prints board to screen
+	
+	//prints board
 	public void printBoard(){
 		for(int i = 5; i >= 0; i--){
 			for(int j = 0; j < 7; j++){
