@@ -13,14 +13,18 @@ public class GUI {
 	private JFrame frame;
 	private JPanel panel;
 	
+	private JButton helpButton;
+	private JButton replayButton;
+	private JButton playersButton;
+	
 	private ImageIcon image;
 	
-	private ArrayList<ArrayList<JButton>> spaces = new ArrayList<>();
+	private ArrayList<ArrayList<JLabel>> spaces = new ArrayList<>();
 	
 	public GUI(){
 		frame = new JFrame("Connect Four");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(new Dimension(780,720));
+		frame.setSize(new Dimension(780,680));
 		
 		panel = new JPanel();
 		fillPanel();
@@ -30,7 +34,7 @@ public class GUI {
 	}
 	
 	private void fillPanel(){
-		panel.setPreferredSize(new Dimension(780,720));
+		panel.setPreferredSize(new Dimension(780,680));
 		panel.setLayout(new GridBagLayout());
 		
 		GridBagConstraints c = new GridBagConstraints();
@@ -47,7 +51,7 @@ public class GUI {
 			}
 		}
 		
-		//add left side images
+		/*//add left side images
 		try{
 			image = new ImageIcon("C4LeftSide.png");
 		}catch(Exception e){}
@@ -79,8 +83,63 @@ public class GUI {
 		}catch(Exception e){}
 		c.gridx = 10;
 		c.gridy = 9;
+		panel.add(new JLabel(image), c);*/
+		//Add game title
+		try{
+			image = new ImageIcon("C4Title.png");
+		}catch(Exception e){}
+		c.gridx = 5;
+		c.gridy = 0;
+		c.gridheight = 1;
+		c.gridwidth = 3;
 		panel.add(new JLabel(image), c);
 		
+		//Add player labels
+		try{
+			image = new ImageIcon("C4Player1.png");
+		}catch(Exception e){}
+		c.gridx = 0;
+		c.gridy = 2;
+		c.gridheight = 1;
+		c.gridwidth = 3;
+		panel.add(new JLabel(image), c);
+		try{
+			image = new ImageIcon("C4Player2.png");
+		}catch(Exception e){}
+		c.gridx = 10;
+		c.gridy = 2;
+		c.gridheight = 1;
+		c.gridwidth = 3;
+		panel.add(new JLabel(image), c);
+		
+		//Adds bottom buttons
+		try{
+			image = new ImageIcon("C4Help.png");
+		}catch(Exception e){}
+		c.gridx = 12;
+		c.gridy = 11;
+		c.gridheight = 1;
+		c.gridwidth = 1;
+		helpButton = new JButton(image);
+		panel.add(helpButton, c);
+		try{
+			image = new ImageIcon("C4PlayAgain.png");
+		}catch(Exception e){}
+		c.gridx = 0;
+		c.gridy = 11;
+		c.gridheight = 1;
+		c.gridwidth = 1;
+		replayButton = new JButton(image);
+		panel.add(replayButton, c);
+		try{
+			image = new ImageIcon("C4SinglePlayer.png");
+		}catch(Exception e){}
+		c.gridx = 1;
+		c.gridy = 11;
+		c.gridheight = 1;
+		c.gridwidth = 1;
+		playersButton = new JButton(image);
+		panel.add(playersButton, c);
 	}
 	
 	
