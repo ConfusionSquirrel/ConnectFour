@@ -6,6 +6,7 @@ public class Grid {
 
 	private ArrayList<ArrayList<Tile>> columns = new ArrayList<>();
 	
+	
 	public Grid(){
 		generateGrid();
 	}
@@ -37,56 +38,84 @@ public class Grid {
 		//asking until input is valid
 	//Sets the first open space in selected column to the symbol of the specified player
 		//"red" (O) for player 1, "yellow" (X) for player 2
-	//Prints the grid
-	public void move(int playerNum){
-		boolean goodInput = false;
-		String input = "";
-		int inputCol = 8;
-		while(!goodInput){
-			input = Input.promptInput("Which column would you like to place your piece in? (1-7):");
-			try{
-				inputCol = Integer.valueOf(input) - 1;
-			}catch(Exception e){}
-			if(inputCol < 8 && inputCol >= 0){
-				if(firstOpen(inputCol) != 8){
-					goodInput = true;
+	
+	public void turn(GUI face){
+		face.togglePlayerLabelHighlight();
+		if(Driver.getPlayers() == 1 && Driver.getWhoseTurn() == 2){
+			
+		}
+		else{
+			Driver.setTimeToClick(true);
+			System.out.println("okay we got this far");
+			while(Driver.isTimeToClick()){
+				try {
+				    Thread.sleep(100);
+				}catch(Exception e){}
+			}
+		}
+	}
+	public void drop(int col){
+		if(firstOpen(col) != 8){
+			int row = firstOpen(col);
+			columns.get(col).get(row).fillTile();
+			int[] coord = {col,row};
+			Driver.face.fillSpot(coord);
+			Driver.setTimeToClick(false);
+			
+			if(isTie()){
+				Driver.setGameover(true);
+			}
+			else if(isWin(coord)){
+				Driver.setGameover(true, Driver.getWhoseTurn());
+			}
+		}
+	}
+	private boolean isTie(){
+		boolean allFull = true;
+		for(int i = 0; i < 7; i++){
+			if(firstOpen(i) != 8) allFull = false;
+		}
+		return allFull;
+	}
+	private boolean isWin(int[] coord){		
+		int[] xMods = {0,1,1,1,0,(Integer)(-1),(Integer)(-1),(Integer)(-1)};
+		int[] yMods = {1,1,0,(Integer)(-1),(Integer)(-1),(Integer)(-1),0,1};
+		int[] totals = new int[8];
+		int curTarget = Driver.getWhoseTurn();
+		for(int i = 0; i < 8; i++){
+			int curX = coord[0];
+			int curY = coord[1];
+			int total = 0;
+			boolean lineStop = false;
+			for(int j = 0; j < 3; j++){
+				if(!lineStop){
+					curX += xMods[i];
+					curY += yMods[i];
+					try{
+						if(columns.get(curX).get(curY).getState() == curTarget){
+							total += 1;
+						}
+						else{
+							lineStop = true;
+						}
+					}catch(Exception e){}
 				}
 			}
+			totals[i%4] += total;
 		}
-		int row = firstOpen(inputCol);
-		String playerColour;
-		if(playerNum == 1){
-			playerColour = "Red";
+		for(int i : totals){
+			if(i >= 3){
+				return true;
+			}	
 		}
-		else{
-			playerColour = "Yellow";
-		}
-		columns.get(inputCol-1).get(row).setTile(playerColour);
-		printBoard();
+		return false;
 	}
-	
-	//Alternate; works if you have pre-checked column and row
-	public void move(int playerNum, int column, int row){
-		String playerColour;
-		if(playerNum == 1){
-			playerColour = "Red";
-		}
-		else{
-			playerColour = "Yellow";
-		}
-		columns.get(column).get(row).setTile(playerColour);
-		printBoard();
-	}
-	
-	//Temp text-based
-	
-	//prints board
-	public void printBoard(){
-		for(int i = 5; i >= 0; i--){
-			for(int j = 0; j < 7; j++){
-				System.out.print(columns.get(j).get(i).getChar() + " ");
+
+	public void wipe(){
+		for(ArrayList<Tile> a : columns){
+			for(Tile t : a){
+				t.wipe();
 			}
-			System.out.println("");
 		}
 	}
 }
