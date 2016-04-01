@@ -1,11 +1,12 @@
 package scott.emmett;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Grid {
 
 	private ArrayList<ArrayList<Tile>> columns = new ArrayList<>();
-	
+	private Random rand = new Random();
 	
 	public Grid(){
 		generateGrid();
@@ -42,7 +43,8 @@ public class Grid {
 	public void turn(GUI face){
 		face.togglePlayerLabelHighlight();
 		if(Driver.getPlayers() == 1 && Driver.getWhoseTurn() == 2){
-			
+			int col = decideColumn();
+			drop(col);
 		}
 		else{
 			Driver.setTimeToClick(true);
@@ -111,7 +113,15 @@ public class Grid {
 		return false;
 	}
 
-	public void wipe(){
+	private int decideColumn(){
+		int column = -1;
+		do{
+			column = rand.nextInt(7);
+		}while(firstOpen(column) == 8);
+		return column;
+	}
+	
+ 	public void wipe(){
 		for(ArrayList<Tile> a : columns){
 			for(Tile t : a){
 				t.wipe();

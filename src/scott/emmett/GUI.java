@@ -25,7 +25,6 @@ public class GUI {
 	private JButton playersButton;
 	
 	private ImageIcon image;
-	private ImageIcon imageRollover;
 	
 	private JLabel leftPlayerLabel;
 	private JLabel rightPlayerLabel;
@@ -91,6 +90,7 @@ public class GUI {
 		}
 		helpButton.addActionListener(new HelpClickListener());
 		replayButton.addActionListener(new ReplayClickListener());
+		playersButton.addActionListener(new PlayersClickListener());
 	}
 	
 	private void addSides(GridBagConstraints c){
@@ -180,6 +180,8 @@ public class GUI {
 	private void loadImages(){
 		try{
 			pics.put("Blank", new ImageIcon("C4Blank.png"));
+			pics.put("Comp", new ImageIcon("C4Comp.png"));
+			pics.put("CompHighlighted", new ImageIcon("C4CompHighlighted.png"));
 			pics.put("Help", new ImageIcon("C4Help.png"));
 			pics.put("LeftLeg", new ImageIcon("C4LeftLeg.png"));
 			pics.put("LeftSide", new ImageIcon("C4LeftSide.png"));
@@ -206,7 +208,7 @@ public class GUI {
 		if(Driver.getWhoseTurn() == 1){
 			leftPlayerLabel.setIcon(pics.get("Player1Highlighted"));
 			if(Driver.getPlayers() == 1){
-				
+				rightPlayerLabel.setIcon(pics.get("Comp"));
 			}
 			else{
 				rightPlayerLabel.setIcon(pics.get("Player2"));
@@ -215,7 +217,7 @@ public class GUI {
 		else{
 			leftPlayerLabel.setIcon(pics.get("Player1"));
 			if(Driver.getPlayers() == 1){
-				
+				rightPlayerLabel.setIcon(pics.get("CompHighlighted"));
 			}
 			else{
 				rightPlayerLabel.setIcon(pics.get("Player2Highlighted"));
@@ -285,6 +287,24 @@ private class ReplayClickListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Driver.replay();
 		
+	}
+}
+private class PlayersClickListener implements ActionListener{
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(Driver.getPlayers() == 1){
+			Driver.setPlayers(2);
+			playersButton.setIcon(pics.get("MultiPlayer"));
+			rightPlayerLabel.setIcon(pics.get("Player2"));
+		}
+		else{
+			Driver.setPlayers(1);
+			playersButton.setIcon(pics.get("SinglePlayer"));
+			rightPlayerLabel.setIcon(pics.get("Comp"));
+		}
+		
+				
 	}
 }
 

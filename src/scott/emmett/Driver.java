@@ -28,6 +28,7 @@ public class Driver {
 		replay = false;
 		gameover = false;
 		timeToClick = false;
+		winner = 5;
 		grid.wipe();
 		face.wipe();
 		while(!gameover){
@@ -94,6 +95,9 @@ public class Driver {
 		else{
 			replay = true;
 		}
+	}
+	public static void setWhoseTurn(int num){
+		playersTurn = num;
 	}
 	
 	public static int getPlayers(){
